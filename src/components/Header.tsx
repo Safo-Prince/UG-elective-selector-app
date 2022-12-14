@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRevalidator } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 
 const Header = () => {
-  const [me,setme]=useState(localStorage.getItem("p"))
+  const [id, setId] = useState(localStorage.getItem("UserID"));
   const { identificationNumber }: any = useContext(UserContext);
   const userID: string = identificationNumber?.current?.value;
+  userID ? localStorage.setItem("UserID", userID) : "";
+
+  useEffect(() => {
+    userID ? localStorage.setItem("UserID", userID) : "";
+  }, []);
 
   const navigate = useNavigate();
   return (
@@ -48,7 +53,7 @@ const Header = () => {
           className="h-14 w-16"
           src="https://ugelectiveshelper.netlify.app/assets/img/profile-picture-circle-hd.png"
         />
-        <span className="text-black">{userID}</span>
+        <span className="text-black font-bold ml-2">{id}</span>
         <button
           onClick={() => navigate("/")}
           type="button"
