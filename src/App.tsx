@@ -1,19 +1,28 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
-import About from "./components/About";
-import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
+import HomeScreen from "./components/HomeScreen";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ContactUs from "./components/ContactUs";
+import About from "./components/About";
+import { UserContext } from "./context/userContext";
+import { useRef } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const identificationNumber = useRef<HTMLInputElement>(null);
+  const PinNumber = useRef<HTMLInputElement>(null);
   return (
-    <div>
-      {/* <About />
-      <HomeScreen /> */}
-      <LoginScreen />
-    </div>
+    <UserContext.Provider value={{ identificationNumber, PinNumber }}>
+      <div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LoginScreen />} />
+            <Route path="/home" element={<HomeScreen />} />
+            <Route path="/aboutus" element={<About />} />
+            <Route path="/contactus" element={<ContactUs />} />
+          </Routes>
+        </Router>
+      </div>
+    </UserContext.Provider>
   );
 }
 
