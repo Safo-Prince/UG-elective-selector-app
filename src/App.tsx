@@ -4,6 +4,7 @@ import HomeScreen from "./components/HomeScreen";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ContactUs from "./components/ContactUs";
 import About from "./components/About";
+import Option from "./components/Option";
 import { UserContext } from "./context/userContext";
 import { useRef } from "react";
 
@@ -15,6 +16,7 @@ function App() {
       <div>
         <Router>
           <Routes>
+            <Route path="/option" element={<Option />} />
             <Route path="/" element={<LoginScreen />} />
             <Route path="/home" element={<HomeScreen />} />
             <Route path="/aboutus" element={<About />} />
